@@ -10,7 +10,7 @@ import br.iff.pooa20141.supermercado.model.entity.Fabricante;
 
 @Stateless
 @LocalBean
-public class FrabricantePersistence extends AbstractPersistence implements
+public class FabricantePersistence extends AbstractPersistence implements
 		FabricantePersistenceRemote {
 
 	/* (non-Javadoc)
