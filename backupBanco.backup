@@ -1,0 +1,439 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.4
+-- Dumped by pg_dump version 9.3.4
+-- Started on 2014-08-12 21:03:09 BRT
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 179 (class 3079 OID 11791)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2042 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 172 (class 1259 OID 16725)
+-- Name: categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE categoria (
+    uid character varying(40) NOT NULL,
+    descricao character varying(40),
+    setor character varying(40)
+);
+
+
+ALTER TABLE public.categoria OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16735)
+-- Name: fabricante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE fabricante (
+    uid character varying(40) NOT NULL,
+    nome character varying(50)
+);
+
+
+ALTER TABLE public.fabricante OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16770)
+-- Name: itemlista; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE itemlista (
+    uid character varying(40) NOT NULL,
+    quantidade integer,
+    produto character varying(40),
+    listacompra character varying(40)
+);
+
+
+ALTER TABLE public.itemlista OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 16760)
+-- Name: listacompra; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE listacompra (
+    uid character varying(40) NOT NULL,
+    mes integer,
+    usuario character varying(40)
+);
+
+
+ALTER TABLE public.listacompra OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 16785)
+-- Name: pesquisapreco; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pesquisapreco (
+    uid character varying(40) NOT NULL,
+    valor real,
+    data date,
+    comprou boolean,
+    supermercado character varying(40),
+    itemlista character varying(40)
+);
+
+
+ALTER TABLE public.pesquisapreco OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16740)
+-- Name: produto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE produto (
+    uid character varying(40) NOT NULL,
+    codigobarra character varying(50),
+    nome character varying(50),
+    descricao character varying(120),
+    categoria character varying(40),
+    fabricante character varying(40)
+);
+
+
+ALTER TABLE public.produto OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 16720)
+-- Name: setor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE setor (
+    uid character varying(40) NOT NULL,
+    descricao character varying(40)
+);
+
+
+ALTER TABLE public.setor OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16715)
+-- Name: supermercado; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE supermercado (
+    uid character varying(40) NOT NULL,
+    nome character varying(100),
+    endereco character varying(100),
+    complemento character varying(40),
+    bairro character varying(50),
+    cidade character varying(100),
+    cep character varying(8),
+    latitude real,
+    longitude real
+);
+
+
+ALTER TABLE public.supermercado OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 16755)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    uid character varying(40) NOT NULL,
+    nome character varying(100),
+    login character varying(20),
+    senha character varying(200)
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 2028 (class 0 OID 16725)
+-- Dependencies: 172
+-- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY categoria (uid, descricao, setor) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2029 (class 0 OID 16735)
+-- Dependencies: 173
+-- Data for Name: fabricante; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY fabricante (uid, nome) FROM stdin;
+eddb6f16-742b-49df-a112-33af3c80f042	Nome
+08b7eb6a-716d-47dc-9598-0d9fc2c44df8	Nome
+\.
+
+
+--
+-- TOC entry 2033 (class 0 OID 16770)
+-- Dependencies: 177
+-- Data for Name: itemlista; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY itemlista (uid, quantidade, produto, listacompra) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2032 (class 0 OID 16760)
+-- Dependencies: 176
+-- Data for Name: listacompra; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY listacompra (uid, mes, usuario) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2034 (class 0 OID 16785)
+-- Dependencies: 178
+-- Data for Name: pesquisapreco; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY pesquisapreco (uid, valor, data, comprou, supermercado, itemlista) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2030 (class 0 OID 16740)
+-- Dependencies: 174
+-- Data for Name: produto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY produto (uid, codigobarra, nome, descricao, categoria, fabricante) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2027 (class 0 OID 16720)
+-- Dependencies: 171
+-- Data for Name: setor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY setor (uid, descricao) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2026 (class 0 OID 16715)
+-- Dependencies: 170
+-- Data for Name: supermercado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY supermercado (uid, nome, endereco, complemento, bairro, cidade, cep, latitude, longitude) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2031 (class 0 OID 16755)
+-- Dependencies: 175
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY usuario (uid, nome, login, senha) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1898 (class 2606 OID 16729)
+-- Name: pk_categoria; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT pk_categoria PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 16739)
+-- Name: pk_fabricante; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY fabricante
+    ADD CONSTRAINT pk_fabricante PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1908 (class 2606 OID 16774)
+-- Name: pk_itemLista; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY itemlista
+    ADD CONSTRAINT "pk_itemLista" PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1906 (class 2606 OID 16764)
+-- Name: pk_lista_compra; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY listacompra
+    ADD CONSTRAINT pk_lista_compra PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1910 (class 2606 OID 16789)
+-- Name: pk_pesquisa; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pesquisapreco
+    ADD CONSTRAINT pk_pesquisa PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1902 (class 2606 OID 16744)
+-- Name: pk_produto; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY produto
+    ADD CONSTRAINT pk_produto PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1896 (class 2606 OID 16724)
+-- Name: pk_setor; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY setor
+    ADD CONSTRAINT pk_setor PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1894 (class 2606 OID 16719)
+-- Name: pk_supermercado; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY supermercado
+    ADD CONSTRAINT pk_supermercado PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1904 (class 2606 OID 16759)
+-- Name: pk_usuario; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT pk_usuario PRIMARY KEY (uid);
+
+
+--
+-- TOC entry 1912 (class 2606 OID 16745)
+-- Name: fk_categoria_produto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY produto
+    ADD CONSTRAINT fk_categoria_produto FOREIGN KEY (categoria) REFERENCES categoria(uid);
+
+
+--
+-- TOC entry 1913 (class 2606 OID 16750)
+-- Name: fk_fabricante_produto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY produto
+    ADD CONSTRAINT fk_fabricante_produto FOREIGN KEY (fabricante) REFERENCES fabricante(uid);
+
+
+--
+-- TOC entry 1918 (class 2606 OID 16815)
+-- Name: fk_item_pesquisa; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pesquisapreco
+    ADD CONSTRAINT fk_item_pesquisa FOREIGN KEY (itemlista) REFERENCES itemlista(uid);
+
+
+--
+-- TOC entry 1915 (class 2606 OID 16775)
+-- Name: fk_item_produto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY itemlista
+    ADD CONSTRAINT fk_item_produto FOREIGN KEY (produto) REFERENCES produto(uid);
+
+
+--
+-- TOC entry 1916 (class 2606 OID 16800)
+-- Name: fk_listacompra_item; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY itemlista
+    ADD CONSTRAINT fk_listacompra_item FOREIGN KEY (listacompra) REFERENCES listacompra(uid);
+
+
+--
+-- TOC entry 1911 (class 2606 OID 16730)
+-- Name: fk_setor_categoria; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT fk_setor_categoria FOREIGN KEY (setor) REFERENCES setor(uid);
+
+
+--
+-- TOC entry 1914 (class 2606 OID 16805)
+-- Name: fk_usuario_listacompra; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY listacompra
+    ADD CONSTRAINT fk_usuario_listacompra FOREIGN KEY (usuario) REFERENCES usuario(uid);
+
+
+--
+-- TOC entry 1917 (class 2606 OID 16790)
+-- Name: pk_pesquisa_super; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pesquisapreco
+    ADD CONSTRAINT pk_pesquisa_super FOREIGN KEY (supermercado) REFERENCES supermercado(uid);
+
+
+--
+-- TOC entry 2041 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-08-12 21:03:10 BRT
+
+--
+-- PostgreSQL database dump complete
+--
+
