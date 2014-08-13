@@ -15,7 +15,7 @@ import br.iff.pooa20141.supermercado.model.controller.FabricantePersistenceRemot
 import br.iff.pooa20141.supermercado.model.entity.Fabricante;
 
 public class FabricanteTest {
-	
+
 	private FabricantePersistenceRemote fabricantePR;
 
 	@Before
@@ -46,5 +46,36 @@ public class FabricanteTest {
 		assertEquals(fabricante.getUid(), uid);
 		fabricantePR.delete(uid);
 	}
+
+	@Test
+	public void testupdate() {
+		String uid = UUID.randomUUID().toString();
+		fabricantePR.inserir(uid, "Nome");
+
+		Fabricante fabricanteUp = fabricantePR.update(uid, "Descricao1");
+
+		assertEquals(fabricanteUp.getNome(), "Descricao1");
+		fabricantePR.delete(uid);
+	}
+
+	@Test
+	public void testfind() {
+		String uid = UUID.randomUUID().toString();
+		fabricantePR.inserir(uid, "Nome");
+
+		Fabricante fabricanteUp = fabricantePR.find(uid);
+
+		assertEquals(fabricanteUp.getNome(), "Nome");
+		fabricantePR.delete(uid);
+	}
+	@Test
+	public void testdelete() {
+		String uid = UUID.randomUUID().toString();
+		fabricantePR.inserir(uid,"Nome");
+
+		fabricantePR.delete(uid);
+		assertEquals(fabricantePR.find(uid),null);
+	}
+
 
 }
